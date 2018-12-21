@@ -23,7 +23,8 @@ class Tests {
 		outputStream = new BitOutputStream(testFile);
 		
 		ArrayList<Integer> test = new ArrayList<>(Arrays.asList(input));
-		Bic.compressIntegers(test, outputStream, 0, test.size()-1, test.get(0), test.get(test.size()-1));
+//		Bic.compressIntegers(test, outputStream, 0, test.size()-1, test.get(0), test.get(test.size()-1));
+		Bic.compressData(test, outputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
