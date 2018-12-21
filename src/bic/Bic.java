@@ -14,6 +14,7 @@ public class Bic {
 
 	}
 	
+	// takes an array list of values and writes the compressed data to bit output stream
 	static void compressIntegers(ArrayList<Integer> values, BitOutputStream out,
 			int low, int high, int minValue, int maxValue) throws java.lang.Exception {
 		
@@ -30,10 +31,13 @@ public class Bic {
 		return;
 		
 	}
+	
+	// number of bits required to compress x
 	static int numberOfBits(int x) {
 	    return (int)Math.ceil((Math.log(x) / Math.log(2)));
 	}
 	
+	// compress integer in range and write
 	static void compressAndWriteInteger(int value, int range_low, int range_high, BitOutputStream out) throws java.lang.Exception {
 		
 		if(value<range_low || value>range_high) {
@@ -46,6 +50,7 @@ public class Bic {
 		System.out.println("compress "+value+" in range ["+range_low+" , "+range_high+"] with "+bitCount+" bits");
 	}
 	
+	// fills data into []values. Decompressing logic sits here
 	static void decompressInteger(int[] values, int low, int high, int minValue, int maxValue, BitInputStream in) throws IOException {
 		
 		if(low>high)
@@ -69,12 +74,16 @@ public class Bic {
 		
 	}
 	
+	// input: Bit-stream to data
+	// output: Array of decompresed integers
 	static int[] decompressData(BitInputStream in) throws IOException{
 		// read meta data
 		int high = 7;
 		int low = 0;
 		int minValue = 3;
 		int maxValue = 20;
+		
+		// declare array
 		int[] output = new int[high+1];
 		decompressInteger(output, low, high, minValue, maxValue, in);
 		return output;
