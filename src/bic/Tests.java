@@ -47,7 +47,7 @@ class Tests {
 			}
 			System.out.println("testCompressDecompressArray : PASS");
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
