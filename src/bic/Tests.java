@@ -11,11 +11,13 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 class Tests {
-
+	
+	// this test takes an array input compresses it and writes it out to the file 
 	@Test
-	void test() {
+	void testCompressDecompressArray() {
+				
 		String testFile = "testFile";
-		Integer[] input = {3,8,9,11,12,13,17,20};
+		Integer[] input = {1,2,3,4,5};
 		int output[];
 		// compress and write file
 		BitOutputStream outputStream = null;
@@ -23,7 +25,6 @@ class Tests {
 		outputStream = new BitOutputStream(testFile);
 		
 		ArrayList<Integer> test = new ArrayList<>(Arrays.asList(input));
-//		Bic.compressIntegers(test, outputStream, 0, test.size()-1, test.get(0), test.get(test.size()-1));
 		Bic.compressData(test, outputStream);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,6 +39,14 @@ class Tests {
 			output = Bic.decompressData(inputStream);
 			System.out.println("input "+Arrays.toString(input));
 			System.out.println("output "+Arrays.toString(output));
+			
+			// compare two arrays
+			for(int i=0;i<input.length;i++) {
+				if(input[i]!=output[i])
+					fail("input and output arrays not equal");
+			}
+			System.out.println("testCompressDecompressArray : PASS");
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,9 +55,7 @@ class Tests {
 			inputStream.close();
 			new File(testFile).delete();
 		}
-		
-		
-	
 	}
+	
 
 }
